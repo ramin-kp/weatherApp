@@ -43,6 +43,12 @@ const getCurrentWeatherLocation = async (lat, lon, callback) => {
   const data = await getApi.json();
   callback(data);
 };
+const getForecastWeatherByLocation = async (lat, lon, callback) => {
+  const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+  const getApi = await fetch(url);
+  const data = await getApi.json();
+  callback(data);
+};
 const weekDay = (data) => {
   const weekIndex = new Date(data * 1000).getDay();
   const day = [
@@ -57,6 +63,7 @@ const weekDay = (data) => {
   return day[weekIndex];
 };
 const setDataForecast = async (data) => {
+  showWeatherForecast.innerHTML = "";
   const forecastWeather = await data.list.filter((item) =>
     item.dt_txt.endsWith("12:00:00")
   );
@@ -72,7 +79,7 @@ const setDataForecast = async (data) => {
     showWeatherForecast.innerHTML += forecastWeatherJsx;
   });
 };
-const getForecastWeatherLocation = async (city) => {
+const getForecastWeatherByName = async (city) => {
   const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`;
   const getApi = await fetch(url);
   const data = await getApi.json();
@@ -85,7 +92,7 @@ const searchHandler = async () => {
     alert("لطفا نام شهر خود را وارد کنید.");
   }
   getCurrentWeatherCity(cityName, cityWeatherInfo);
-  getForecastWeatherLocation(cityName);
+  getForecastWeatherByName(cityName);
 };
 const getGeoLocation = () => {};
 const locationHandler = () => {
@@ -93,6 +100,7 @@ const locationHandler = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       getCurrentWeatherLocation(latitude, longitude, cityWeatherInfo);
+      getForecastWeatherByLocation(latitude, longitude, setDataForecast);
     });
   } else {
     alert("مرورگر شما از لوکیشن ساپورت نمی کند.");
