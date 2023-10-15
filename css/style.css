@@ -159,3 +159,33 @@ body {
   line-height: 50px;
   text-align: center;
 }
+
+.forecast {
+  width: 100%;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(5, minmax(200px, auto));
+  margin: 0 auto;
+}
+.forecast__box {
+  display: flex;
+  gap: 50px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-normal);
+  border-radius: var(--border-normal);
+  -webkit-border-radius: var(--border-normal);
+  -moz-border-radius: var(--border-normal);
+  -ms-border-radius: var(--border-normal);
+  -o-border-radius: var(--border-normal);
+}
+.forecast__main {
+  color: var(--color-secondary);
+}
+.forecast__temp {
+  direction: ltr;
+}
