@@ -3,8 +3,8 @@ const API_KEY = "a02276d2ec788a78ac748aa319792031";
 const searchInput = document.querySelector(".header__search-input");
 const searchBtn = document.querySelector(".header__btn");
 const showWeatherCity = document.querySelector(".weather");
+const searchLocationIcon = document.querySelector(".header__img");
 const cityWeatherInfo = (data) => {
-  console.log(data);
   const dataInfoJsx = `
   <div class="weather__city">
     <h1>${data.name} , ${data.sys.country}</h1>
@@ -29,20 +29,36 @@ const cityWeatherInfo = (data) => {
   showWeatherCity.classList.add("weather--show");
   showWeatherCity.innerHTML = dataInfoJsx;
 };
-const getCurrentWeatherCity = async (city) => {
+const getCurrentWeatherCity = async (city, callback) => {
   const getApi = await fetch(
     `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`
   );
   const data = await getApi.json();
-  return data;
+  callback(data);
+};
+const getCurrentWeatherLocation = async (lat, lon, callback) => {
+  const url = `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+  const getApi = await fetch(url);
+  const data = await getApi.json();
+  callback(data);
 };
 const searchHandler = async () => {
   const cityName = searchInput.value;
   if (!cityName) {
     alert("لطفا نام شهر خود را وارد کنید.");
   }
-  const wetherCity = await getCurrentWeatherCity(cityName);
-  const weatherInfo = cityWeatherInfo(wetherCity);
-  console.log(weatherInfo);
+  getCurrentWeatherCity(cityName, cityWeatherInfo);
+};
+const getGeoLocation = () => {};
+const locationHandler = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      getCurrentWeatherLocation(latitude, longitude, cityWeatherInfo);
+    });
+  } else {
+    alert("مرورگر شما از لوکیشن ساپورت نمی کند.");
+  }
 };
 searchBtn.addEventListener("click", searchHandler);
+searchLocationIcon.addEventListener("click", locationHandler);

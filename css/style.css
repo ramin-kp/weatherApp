@@ -104,12 +104,13 @@ body {
 .weather {
   position: absolute;
   display: none;
+  gap: 30px;
   flex-direction: column;
   align-items: center;
   width: 500px;
   padding: 30px 50px;
   background-color: #ffffff;
-  top: 70%;
+  top: 60%;
   right: 50%;
   box-shadow: var(--shadow-normal);
   border-radius: var(--border-normal);
@@ -117,7 +118,11 @@ body {
   -moz-border-radius: var(--border-normal);
   -ms-border-radius: var(--border-normal);
   -o-border-radius: var(--border-normal);
-  transform: translateX(50%);
+  transform: translateX(53%);
+  -webkit-transform: translateX(53%);
+  -moz-transform: translateX(53%);
+  -ms-transform: translateX(53%);
+  -o-transform: translateX(53%);
 }
 .weather--show {
   display: flex;
