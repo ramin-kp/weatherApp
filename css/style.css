@@ -127,6 +127,10 @@ body {
 .weather--show {
   display: flex;
 }
+.weather__city {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .weather__title {
   display: flex;
   align-items: center;
