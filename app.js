@@ -66,9 +66,12 @@ const searchHandler = async () => {
     alert("لطفا نام شهر خود را وارد کنید.");
   }
   const weatherCityData = await fetchingData("current", cityName);
+  console.log("weatherCityData",weatherCityData)
   cityWeatherInfo(weatherCityData);
+
   const getForecastWeatherByName = await fetchingData("forecast", cityName);
-  cityWeatherInfo(getForecastWeatherByName);
+  console.log("getForecastWeatherByName",getForecastWeatherByName)
+  setDataForecast(getForecastWeatherByName);
 };
 const resolveCallback = async (position) => {
   const getCurrentWeatherLocation = await fetchingData(
@@ -76,6 +79,7 @@ const resolveCallback = async (position) => {
     position.coords
   );
   cityWeatherInfo(getCurrentWeatherLocation);
+
   const getForecastWeatherByLocation = await fetchingData(
     "forecast",
     position.coords

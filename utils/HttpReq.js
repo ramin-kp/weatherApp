@@ -7,11 +7,14 @@ const fetchingData = async (type, data) => {
     case "current":
       if (typeof data === "string") {
         url = `${BASE_URL}/weather?q=${data}&appid=${API_KEY}&units=metric`;
+      } else{
+        url = `${BASE_URL}/weather?lat=${data.latitude}&lon=${data.longitude}&appid=${API_KEY}&units=metric`;
+        
       }
       break;
     case "forecast":
       if (typeof data === "string") {
-        url = `${BASE_URL}/forecast?q=${data}&appid=${API_KEY}&units=metric`;
+        url = `${BASE_URL}/forecast?q=${data}&appid=${API_KEY}`;
       } else {
         url = `${BASE_URL}/forecast?lat=${data.latitude}&lon=${data.longitude}&appid=${API_KEY}&units=metric`;
       }
@@ -25,32 +28,5 @@ const fetchingData = async (type, data) => {
   return json;
 };
 
-// const getCurrentWeatherCity = async (city, callback) => {
-//   const getApi = await fetch(
-//     `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`
-//   );
-//   const data = await getApi.json();
-//   callback(data);
-// };
-// const getCurrentWeatherLocation = async (lat, lon, callback) => {
-//   const url = `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-//   const getApi = await fetch(url);
-//   const data = await getApi.json();
-//   callback(data);
-// };
 
-// const getForecastWeatherByLocation = async (lat, lon, callback) => {
-//   const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-//   const getApi = await fetch(url);
-//   const data = await getApi.json();
-//   callback(data);
-// };
-
-// const getForecastWeatherByName = async (city) => {
-//   const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`;
-//   const getApi = await fetch(url);
-//   const data = await getApi.json();
-//   setDataForecast(data);
-//   console.log(data);
-// };
 export default fetchingData;
