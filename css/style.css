@@ -1,7 +1,7 @@
 @import "./font.css";
 :root {
   --color-primary: #4d0de3;
-  --color-secondary: rgb(125, 161, 247);
+  --color-secondary: #7da1f7;
   --color-warning: #fae362;
   --color-error: #f75e45;
   --shadow-normal: 3px 3px 40px 20px rgba(125, 161, 247, 0.6);
@@ -15,22 +15,12 @@
   box-sizing: border-box;
 }
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  height: 100vh;
   font-family: "dana";
+  
 }
 .container {
   width: 1200px;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 10px;
+  margin: 0 auto;
   padding: 10px;
 }
 .header {
@@ -105,14 +95,14 @@ body {
 }
 .weather {
   position: absolute;
-  display: none;
+  display: flex;
   gap: 30px;
   flex-direction: column;
   align-items: center;
   width: 500px;
   padding: 30px 50px;
   background-color: #ffffff;
-  top: 60%;
+  top: 65%;
   right: 50%;
   box-shadow: var(--shadow-normal);
   border-radius: var(--border-normal);
@@ -126,9 +116,51 @@ body {
   -ms-transform: translateX(53%);
   -o-transform: translateX(53%);
 }
-.weather--show {
+.weather__loader,
+.forecast__loader {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border: 5px solid red;
+  border-color: #ff3d00 transparent;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  animation: rotate 0.4s infinite linear;
+  -webkit-animation: rotate 0.4s infinite linear;
+  z-index: 100;
 }
+.forecast__loader-box {
+  width: 100%;
+  height: 395px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+  }
+}
+/* .weather--show {
+  display: flex;
+} */
 .weather__city {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -153,24 +185,11 @@ body {
 .weather__speed-text {
   color: var(--color-secondary);
 }
-
-.footer {
-  background-color: #999999;
-  width: 100%;
-  height: 40px;
-  line-height: 50px;
-  text-align: center;
-}
-.footer__text {
-  width: 100%;
-}
-
-.forecast {
-  width: 100%;
+.forecast__grid {
   display: grid;
   gap: 40px;
   grid-template-columns: repeat(5, minmax(200px, auto));
-  margin: 0 auto;
+  margin: 130px auto 0 auto;
 }
 .forecast__box {
   display: flex;
@@ -193,4 +212,69 @@ body {
 }
 .forecast__temp {
   direction: ltr;
+}
+.modal {
+  position: absolute;
+  top: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(122, 122, 122, 0.6);
+  z-index: 100;
+  transition: var(--transition-normal);
+  -webkit-transition: var(--transition-normal);
+  -moz-transition: var(--transition-normal);
+  -ms-transition: var(--transition-normal);
+  -o-transition: var(--transition-normal);
+}
+
+.modal__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 300px;
+  height: 150px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: var(--border-xs);
+  -webkit-border-radius: var(--border-xs);
+  -moz-border-radius: var(--border-xs);
+  -ms-border-radius: var(--border-xs);
+  -o-border-radius: var(--border-xs);
+}
+.modal__btn {
+  display: inline;
+  margin: 10px;
+  padding: 10px 15px;
+  background-color: var(--color-error);
+  border-radius: var(--border-xs);
+  -webkit-border-radius: var(--border-xs);
+  -moz-border-radius: var(--border-xs);
+  -ms-border-radius: var(--border-xs);
+  -o-border-radius: var(--border-xs);
+  transition: var(--transition-normal);
+  -webkit-transition: var(--transition-normal);
+  -moz-transition: var(--transition-normal);
+  -ms-transition: var(--transition-normal);
+  -o-transition: var(--transition-normal);
+  cursor: pointer;
+}
+.modal__btn:hover {
+  background-color: #cf4d3a;
+}
+.modal__msg {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  color: var(--color-error);
+}
+.footer {
+  background-color: #999999;
+  width: 100%;
+  height: 40px;
+  line-height: 50px;
+  text-align: center;
 }

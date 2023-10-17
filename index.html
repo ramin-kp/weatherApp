@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <title>ramin karimpour | weather app</title>
-  </head>
-  <body>
-    <div class="container">
-      <header class="header">
-        <div class="header__container">
-          <div>
-            <button class="header__btn">جست‌وجو</button>
 
-            <input
-              class="header__search-input"
-              type="text"
-              placeholder="نام شهر خود را به انگلیسی وارد کنید ..."
-            />
-          </div>
-          <img
-            class="header__img"
-            src="./img/location.png"
-            alt="location-img"
-          />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>ramin karimpour | weather app</title>
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header__container">
+        <div>
+          <button class="header__btn">جست‌وجو</button>
+
+          <input class="header__search-input" type="text" placeholder="نام شهر خود را به انگلیسی وارد کنید ..." />
         </div>
-        <div class="weather"></div>
-      </header>
-      <div class="forecast"></div>
+        <img class="header__img" src="./img/location.png" alt="location-img" />
+      </div>
+      <div class="weather">
+        <span class="weather__loader"></span>
+      </div>
+    </header>
+    <div class="forecast">
+      <div class="forecast__loader-box">
+        <span class="forecast__loader "></span>
+      </div>
     </div>
-    <footer class="footer">
-      <h3 class="footer__text">ساخته شده با ❤️ توسط رامین کریم پور👨‍💻</h3>
-    </footer>
-    <script src="./app.js" type="module"></script>
-  </body>
+  </div>
+  <div class="modal">
+    <div class="modal__box">
+      <div class="modal__btn">X</div>
+      <p class="modal__msg">لطفا وارد کنید.</p>
+    </div>
+  </div>
+  <footer class="footer">
+    ساخته شده با ❤️ توسط رامین کریم پور👨‍💻
+  </footer>
+  <script src="./app.js" type="module"></script>
+</body>
+
 </html>
